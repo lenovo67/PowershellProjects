@@ -28,4 +28,3 @@ Function TeamsChannel{
               get-MgUserJoinedTeam -UserId $userroom.id
             }
         }
-  
