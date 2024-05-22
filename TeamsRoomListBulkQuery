@@ -1,0 +1,31 @@
+Function TeamsChannel{
+    <#
+    .SYNOPSIS
+    This scrip helps to pull all The Teams Rooms name for which a user is member off
+    
+    .DESCRIPTION
+      This scrip helps to pull all The Teams Rooms name for which a user is member off.
+    It takes CSV file and Store the Data of CSV in Array and list all the teams Room  user is member off
+    This will help in Bulk query 
+    
+    .EXAMPLE
+ Create a CSV file 
+ First Colum 1 and Row 1 will should be labed as NAME" without Double Codes
+ From 2 Colum enter Display Name of User as you see in Directory Service (AD) for Example
+ <Durgesh Tripathy> fill the colums with display name of user's for whom you need to Pull this data.
+ Save file in CSV. When asked for CSV fill the data example <D:\Users\Documents\example.csv>
+#>
+
+    $filePath=Read-Host "Enter CSV File Path"
+    $UserData = Import-Csv $filePath
+               $user=$userData | Select-Object -ExpandProperty Name
+               Write-Host $user.count
+               Write-Host $user
+               for($i=0;$i -lt $user.Length;$i++ ){
+                Write-Host "Room List for User $target" -ForegroundColor DarkGreen -BackgroundColor White
+                $target=$user[$i]
+              $userroom = get-MgUser -Filter "DisplayName eq '$target'"
+              get-MgUserJoinedTeam -UserId $userroom.id
+            }
+        }
+  
